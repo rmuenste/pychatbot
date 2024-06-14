@@ -33,6 +33,9 @@ templates = Jinja2Templates(directory="templates")
 # Initialize chat log with a system message
 chatLog = [{"role": "system", "content": "You are a helpful assistant."}]
 
+# Initialize chat responses as an empty list
+chatResponses = []
+
 @app.on_event("startup")
 async def startup_event():
     logger.info("Application startup complete.")
@@ -73,22 +76,23 @@ async def call_openai(userInput):
 #==============================================================================
 # @app.post("/chat")
 #==============================================================================
-@app.post("/chat")
-async def callChat(userInput: Annotated[str, Form()]):
+@app.post("/chat", response_class=HTMLResponse)
+async def callChat(request: Request, userInput: Annotated[str, Form()]):
     logger.info("Chat endpoint called.")
-
     chatLog.append({"role": "user", "content": userInput})
-    
+    chatResponses.append(userInput)
     # Make a simple request to OpenAI API
     response = client.chat.completions.create(
         model="gpt-3.5-turbo",
         messages=chatLog
     )
 
+
     botResponse = response.choices[0].message.content
+    chatResponses.append(botResponse)
     chatLog.append({"role": "assistant", "content": botResponse})
+    return templates.TemplateResponse("home.html", {"request": request, "chatResponses": chatResponses, "chatLog": chatLog})
     
-    return {"response": response, "chatLog": chatLog}    
 
 if __name__ == "__main__":
     import uvicorn
