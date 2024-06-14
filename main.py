@@ -9,18 +9,28 @@ from dotenv import load_dotenv
 import openai
 from openai import OpenAI
 
+# Load environment variables from .env file
 load_dotenv()
 
+# Retrieve OpenAI API key from environment variables
 openai_api_key = os.getenv("OPENAI_API_KEY")
 
+# Create OpenAI client with API key
 client = OpenAI(api_key=openai_api_key)
 
+# Configure logging module to log INFO level and above messages
 logging.basicConfig(level=logging.INFO)
+
+# Create logger for the current module
 logger = logging.getLogger(__name__)
+
+# Create FastAPI application
 app = FastAPI()
 
+# Create Jinja2 templates rendering engine with templates directory as the source
 templates = Jinja2Templates(directory="templates")
 
+# Initialize chat log with a system message
 chatLog = [{"role": "system", "content": "You are a helpful assistant."}]
 
 @app.on_event("startup")
@@ -31,15 +41,41 @@ async def startup_event():
 async def shutdown_event():
     logger.info("Application shutdown complete.")
 
+#==============================================================================
+# @app.get("/")
+#==============================================================================
 @app.get("/", response_class=HTMLResponse)
 async def read_root(request: Request):
 #    template = Template("<h1>Hello, {{ name }}!</h1>")
 #    html_content = template.render(name="FastAPI")
-    return templates.TemplateResponse("layout.html", {"request": request})
+    return templates.TemplateResponse("home.html", {"request": request})
 
+#==============================================================================
+# @app.get("/openai")
+#==============================================================================
 @app.get("/openai")
 async def call_openai(userInput):
     logger.info("OpenAI endpoint called.")
+
+    chatLog.append({"role": "user", "content": userInput})
+    
+    # Make a simple request to OpenAI API
+    response = client.chat.completions.create(
+        model="gpt-3.5-turbo",
+        messages=chatLog
+    )
+
+    botResponse = response.choices[0].message.content
+    chatLog.append({"role": "assistant", "content": botResponse})
+    
+    return {"response": response, "chatLog": chatLog}    
+
+#==============================================================================
+# @app.post("/chat")
+#==============================================================================
+@app.post("/chat")
+async def callChat(userInput: Annotated[str, Form()]):
+    logger.info("Chat endpoint called.")
 
     chatLog.append({"role": "user", "content": userInput})
     
