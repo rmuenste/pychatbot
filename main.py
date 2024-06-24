@@ -4,6 +4,7 @@ from fastapi import FastAPI, Form, Request, WebSocket
 from typing import Annotated
 from fastapi.templating import Jinja2Templates
 from fastapi.responses import HTMLResponse
+from fastapi.staticfiles import StaticFiles
 from jinja2 import Template
 from dotenv import load_dotenv
 import openai
@@ -26,6 +27,9 @@ logger = logging.getLogger(__name__)
 
 # Create FastAPI application
 app = FastAPI()
+
+# Mount static files
+app.mount("/static", StaticFiles(directory="static"), name="static")
 
 # Create Jinja2 templates rendering engine with templates directory as the source
 templates = Jinja2Templates(directory="templates")
