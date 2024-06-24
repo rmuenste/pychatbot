@@ -1,6 +1,6 @@
 import os
 import logging
-from fastapi import FastAPI, Form, Request
+from fastapi import FastAPI, Form, Request, WebSocket
 from typing import Annotated
 from fastapi.templating import Jinja2Templates
 from fastapi.responses import HTMLResponse
@@ -36,10 +36,16 @@ chatLog = [{"role": "system", "content": "You are a helpful assistant."}]
 # Initialize chat responses as an empty list
 chatResponses = []
 
+#==============================================================================
+# @app Startup
+#==============================================================================
 @app.on_event("startup")
 async def startup_event():
     logger.info("Application startup complete.")
 
+#==============================================================================
+# @app Shutdown
+#==============================================================================
 @app.on_event("shutdown")
 async def shutdown_event():
     logger.info("Application shutdown complete.")
@@ -51,7 +57,7 @@ async def shutdown_event():
 async def read_root(request: Request):
 #    template = Template("<h1>Hello, {{ name }}!</h1>")
 #    html_content = template.render(name="FastAPI")
-    return templates.TemplateResponse("home.html", {"request": request})
+    return templates.TemplateResponse("home.html", {"request": request, "chatResponses": chatResponses, "chatLog": chatLog})
 
 #==============================================================================
 # @app.get("/openai")
@@ -72,6 +78,45 @@ async def call_openai(userInput):
     chatLog.append({"role": "assistant", "content": botResponse})
     
     return {"response": response, "chatLog": chatLog}    
+
+#==============================================================================
+# @app.websocker("/ws")
+#==============================================================================
+@app.websocket("/ws")
+async def websocketChat(websocket: WebSocket):
+
+    await websocket.accept()
+
+    while True:
+        # Get data from client
+        userInput = await websocket.receive_text()
+        chatLog.append({"role": "user", "content": userInput})
+        chatResponses.append(userInput)
+
+        try:
+            # Make a simple request to OpenAI API
+            response = client.chat.completions.create(
+                model="gpt-3.5-turbo",
+                messages=chatLog,
+                stream=True
+            )
+
+            aiResponse = ""
+            for chunk in response:
+                if chunk.choices[0].delta.content is not None:
+                    aiResponse += chunk.choices[0].delta.content
+                    await websocket.send_text(chunk.choices[0].delta.content)
+
+            chatResponses.append(aiResponse)
+
+        except Exception as e:
+            # Send data back to client
+            await websocket.send_text(f'Error: {str(e)}')    
+            logger.error(e)
+
+
+            #botResponse = response.choices[0].message.content
+            #chatLog.append({"role": "assistant", "content": aiResponse})
 
 #==============================================================================
 # @app.post("/chat")
