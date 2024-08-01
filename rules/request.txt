@@ -1,0 +1,32 @@
+i have here a setup for a definition:
+
+twinscrew simulation
+carrea
+A=15000 Pas
+B=1.0 1/s
+C=0.5
+
+tbts
+Tb=100C
+Ts=-50C
+
+customer wants particle tracing and heat simulation to be used. barrel is 150C
+througput is 50 kg/h
+
+wall slip :: yes
+
+rho 980kg/m3
+
+inflow material 140C
+
+non-identical screws, angular shift 60deg
+
+screw diameter 55mm
+screw length 180mm
+screwscrew gap 1mm
+screwbarrel gap 1.5mm
+barrel diameter 5.7cm
+centerline distance 3cm
+
+
+summary should be created, a validation of the available parametrs should be checked and the quantities for which a descriptive computation is addressed in the rules, should be computed. in case that some parameters are provided in other units then indicated in the rules please convert them into the defined units

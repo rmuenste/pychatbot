@@ -1,0 +1,63 @@
+-----------------------------------------
+-----------------------------------------
+MATERIAL 1901
+HDPE Lupolen 5021DX
+Allgemeine Informationen
+Typ
+PE-HD
+Mechanische Informationen
+Materialdichte [kg/m³]
+810
+Thermische Informationen
+Wärmeleitfähigkeit [W/mK]
+0.28865605
+Wärmekapazität [kJ/kgK]
+3.04
+T_B [°C]
+220
+T_st [°C]
+-158.58676
+Nullviskosität (A) [Pa * s]
+103.2
+Rezip. Übergangsgeschwindigkeit (B) [s]
+0.1
+Exponent [-]
+0.5
+
+13051
+Drehzahl (1/min):
+200
+Durchsatz (kg/h):
+12
+Gehäusetemperatur (°C):
+Optional
+Materialtemperatur (°C):
+210
+Zylinderdurchmesser:
+Optional
+28.3
+Achsabstand:
+Optional
+22.8
+Material:
+1901
+
+Output Parameter
+Simulationsergebnisse:
+1
+Mischanalyse/ Particle-Tracing:
+1
+Zylinderdurchmesser: 28,5 mm
+Achsabstand: 23 mm
+Laenge: 45 mm
+Schneckendurchmesser: 28,2 mm
+Schneckenspiel: 0,15 mm
+Kerndurchmesser: 17,1 mm
+Art: zweigaengig
+VCut: 0,5 mm
+
+screw_ZSE027MX_ZME-1-15-30-L_3074566_extended_by_10.off
+
+
+IMPORTANT::
+IF a parameter value is missing for a certain key include there an "UNDEFINED" value
