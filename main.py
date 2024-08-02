@@ -1,3 +1,19 @@
+"""
+python -m venv env
+# Activate the environment:
+#
+# On Windows:
+.\env\Scripts\activate
+#
+# On macOS/Linux:
+source env/bin/activate
+#
+# Install the requirements:
+pip install -r requirements.txt
+
+# Run the application by using the following command:
+uvicorn main:app --reload
+"""
 import os
 import logging
 from fastapi import FastAPI, Form, Request, WebSocket
