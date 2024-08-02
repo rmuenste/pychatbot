@@ -1,369 +1,41 @@
- have a task where a desriptive type of an input is to be converted into a INI file formatted configuration file. I would provide you 1-2 examples for the inputs and outputs and then i would like to ask you for creating an output for a new input.
-
-
-input 1
-
-Drehzahl (1/min):
-400
-Durchsatz (kg/h):
-300
-Gehäusetemperatur (°C):
-Optional
-270
-Materialtemperatur (°C):
-285
-Zylinderdurchmesser:
-Optional
-51.5
-Achsabstand:
-Optional
-41,5
-Material:
-PET1
-Nicht-isotherm inkl. Particle Tracing
-
-PET1
-Wärmeleitfähigkeit: 0,22 W/mK
-Wärmekapa: 1,93 kJ/kgK
-Dichte: 1180 kg/m3
-
-A 173,1447 Pa*s
-B 0,002 s
-C 0,04931
-T:B 285°C
-T:S 125°C
-
-Zylinderdurchmesser:
-51.5 mm
-Achsabstand:
-41,5 mm
-Laenge:
-41 mm
-Kerndurchmesser:
-30,9 mm
-Schneckendurchmesser:
-50,7 mm
-Schneckenspiel,GapScrewScrew:
-0,72 mm
-
-screw_-Y_extended_by_10.off,screw_+Y_extended_by_10.off & type=OFF_LR
-
-vcut :: 0.38mm
-srid :: 11115
-
-eingaengig, single flight : NoOfFlights=1
-
-OUTPUT::
-
-[SigmaFileInfo]
-FileType=ToExtrud3D
-FileVersion=SIGMA 10.0
-Date=07/02/19
-SigmaVersion=SIGMA 12.0.1(4492)
-ConfigId=11115
-
-[E3DGeometryData]
-[E3DGeometryData/Machine]
-Type=TSE
-Unit=mm
-Zwickel=straight
-MachineName=XY 60
-RotationDirection=LEFT
-BarrelDiameter=51.5
-CenterlineDistance=41.5
-BarrelStraightCut=0.38
-NoOfElements=1
-NoOfFlights=1
-BarrelLength=41.0
-
-[E3DGeometryData/Machine/Element_1]
-GapScrewScrew=0.72
-ObjectType=screw
-Unit=mm
-startposition=0.0
-off_filelistL=screw_-Y_extended_by_10.off
-off_filelistR=screw_+Y_extended_by_10.off
-innerdiameter=30.9
-type=OFF_LR
-
-[E3DProcessParameters]
-ScrewSpeed=400.0
-ProcessType=THROUGHPUT
-MassThroughput=300.0
-MaterialTemperature=285.0
-BarrelTemperature=270.0
-ScrewTemperature=_INVALID_
-BarrelTemperatureAdiabatic=NO
-ScrewTemperatureAdiabatic=YES
-
-[E3DProcessParameters/Material]
-Name=PET1
-Type=Polymer
-
-[E3DProcessParameters/Material/RheologicalData]
-CalcVisco=Carreau
-CalcTemp=TbTs
-
-[E3DProcessParameters/Material/RheologicalData/Carreau]
-ZeroViscosity=173.15
-RecipVelocity=0.002
-Exponent=0.04931
-
-[E3DProcessParameters/Material/RheologicalData/TBTS]
-standardtemperature=125.0
-referencetemperature=285.0
-
-[E3DProcessParameters/Material/ThermoData]
-heatconductivity=0.22
-heatconductivityslope=0.0
-heatcapacity=1.93
-heatcapacityslope=0.0
-densitymodel=DENSITY
-
-[E3DProcessParameters/Material/ThermoData/Density]
-Density=1.18
-DensitySlope=0.0
-
-[E3DSimulationsettings]
-MeshQuality=medium
-HexMesher=TwinScrew
-KTPRelease=NO
-
-
-input number 2
-Drehzahl (1/min): 410
-Durchsatz (kg/h): 196
-Gehäusetemperatur (°C) & BarrelTemperatureAdiabatic=NO : 280 
-Materialtemperatur MaterialTemperature (°C): 290
-Zylinderdurchmesser: 51.5 mm
-Achsabstand: 41,5 mm
-Material: PC1
-
-PC1
-Wärmeleitfähigkeit 0,1341 W/mK
-Wärmekapazität: 1,75265 kJ/kgK
-Materaildichte: 1000 kg/m3
-T_B: 300 °C
-T_S: 135,70134 °C
-A: 397,69 Pa*s
-B: 0,00029 s
-C: 0,92012
-
-Zylinderdurchmesser:
-51.5 mm
-Achsabstand:
-41,5 mm
-Kerndurchmesser:
-30,9 mm
-Schneckendurchmesser:
-50,7 mm
-
-Schneckenspiel,GapScrewScrew:
-0,4 mm
-
-VCut = 0.45mm
-
-SRID 12558
-screw_extended_by_10.off & type=OFF
-zweigaengig, two flights : No Of Flights is 2
-
-corresponding output
-
-[SigmaFileInfo]
-FileType=ToExtrud3D
-FileVersion=SIGMA 10.0
-Date=07/02/19
-SigmaVersion=SIGMA 12.0.1(4492)
-ConfigId=12558
-
-[E3DGeometryData]
-[E3DGeometryData/Machine]
-Type=TSE
-Unit=mm
-Zwickel=straight
-MachineName=XY 60
-RotationDirection=LEFT
-BarrelDiameter=51.5
-CenterlineDistance=41.5
-BarrelStraightCut=0.45
-NoOfElements=1
-NoOfFlights=2
-BarrelLength=70.0
-
-[E3DGeometryData/Machine/Element_1]
-GapScrewScrew=0.4
-ObjectType=screw
-Unit=mm
-startposition=0.0
-off_filelist=screw_extended_by_10.off
-innerdiameter=30.9
-type=OFF
-
-[E3DProcessParameters]
-ScrewSpeed=410.0
-ProcessType=THROUGHPUT
-MassThroughput=196.0
-MaterialTemperature=290.0
-BarrelTemperature=280.0
-ScrewTemperature=_INVALID_
-BarrelTemperatureAdiabatic=NO
-ScrewTemperatureAdiabatic=YES
-
-[E3DProcessParameters/Material]
-Name=PC1
-Type=Polymer
-
-[E3DProcessParameters/Material/RheologicalData]
-CalcVisco=Carreau
-CalcTemp=TbTs
-
-[E3DProcessParameters/Material/RheologicalData/Carreau]
-ZeroViscosity=397.69
-RecipVelocity=0.00029
-Exponent=0.92012
-
-[E3DProcessParameters/Material/RheologicalData/TBTS]
-standardtemperature=135.7
-referencetemperature=300.0
-
-[E3DProcessParameters/Material/ThermoData]
-heatconductivity=0.134
-heatconductivityslope=0.0
-heatcapacity=1.75
-heatcapacityslope=0.0
-densitymodel=DENSITY
-
-[E3DProcessParameters/Material/ThermoData/Density]
-Density=1.0
-DensitySlope=0.0
-
-[E3DSimulationsettings]
-MeshQuality=medium
-HexMesher=TwinScrew
-KTPRelease=NO
-
-
-
-input no 3:
-Drehzahl (1/min): 311
-Durchsatz (kg/h): 298
-Gehäusetemperatur (°C): 280
-Materialtemperatur (°C): 290
-Zylinderdurchmesser: 51.5 mm
-Achsabstand: 41,5 mm
-Material: PC1
-
-PC1
-Wärmeleitfähigkeit 0,1341 W/mK
-Wärmekapazität: 1,75265 kJ/kgK
-Materaildichte: 1000 kg/m3
-T_B: 300 °C
-T_S: 135,70134 °C
-A: 397,69 Pa*s
-B: 0,00029 s
-C: 0,92012
-
-Zylinderdurchmesser: 51,5 mm
-Achsabstand: 41,5 mm
-Schneckendurchmesser: 51 mm
-Schneckenspiel: 0,25 mm
-Kerndurchmesser: 30,9 mm
-
-Laenge: 74 mm
-
-vcut : 0.25mm
-GapScrewScrew,screw clearance :: 0.7mm
-
-barreltemperature :: adiabatic
-
-screw_extended_by_10.off & type=OFF
-eingaengig, flight:1
-
-srid 9845
-
-corresponding output:
-
-[SigmaFileInfo]
-
-FileType=ToExtrud3D
-FileVersion=SIGMA 10.0
-Date=07/02/19
-SigmaVersion=SIGMA 12.0.1(4492)
-ConfigId=9845
-
-[E3DGeometryData]
-[E3DGeometryData/Machine]
-Type=TSE
-Unit=mm
-Zwickel=straight
-MachineName=XY 60
-RotationDirection=LEFT
-BarrelDiameter=51.5
-CenterlineDistance=41.5
-BarrelStraightCut=0.25
-NoOfElements=1
-NoOfFlights=1
-BarrelLength=74.0
-
-[E3DGeometryData/Machine/Element_1]
-GapScrewScrew=0.7
-ObjectType=screw
-Unit=mm
-startposition=0.0
-off_filelist=screw_extended_by_10.off
-innerdiameter=30.9
-type=OFF
-
-[E3DProcessParameters]
-ScrewSpeed=311.0
-ProcessType=THROUGHPUT
-MassThroughput=298.0
-MaterialTemperature=290.0
-BarrelTemperature=_INVALID_
-ScrewTemperature=_INVALID_
-BarrelTemperatureAdiabatic=YES
-ScrewTemperatureAdiabatic=YES
-
-[E3DProcessParameters/Material]
-Name=PC1
-Type=Polymer
-
-[E3DProcessParameters/Material/RheologicalData]
-CalcVisco=Carreau
-CalcTemp=TbTs
-
-[E3DProcessParameters/Material/RheologicalData/Carreau]
-ZeroViscosity=397.69
-RecipVelocity=0.00029
-Exponent=0.92012
-
-[E3DProcessParameters/Material/RheologicalData/TBTS]
-standardtemperature=135.7
-referencetemperature=300.0
-
-[E3DProcessParameters/Material/ThermoData]
-heatconductivity=0.1341
-heatconductivityslope=0.0
-heatcapacity=1.75265
-heatcapacityslope=0.0
-densitymodel=DENSITY
-
-[E3DProcessParameters/Material/ThermoData/Density]
-Density=1.0
-DensitySlope=0.0
-
-[E3DSimulationsettings]
-MeshQuality=medium
-HexMesher=TwinScrew
-KTPRelease=NO
-
-
-
-important RULES::
-if a screw pair -Y/+Y is defined then the type of the Element_1 section is OFF_LR, otherwise it is OFF
-the objecttype in the Element_1 section is "screw"
-if BarrelTemperature is defined then BarrelTemperatureAdiabatic is set to "NO"
-the number of elements is set to 1 :: NoOfElements=1
-
-important additional output for statistics::
-write out the number of input and out tokens
+first question to clarify if the task is related to "screw" or "die" simulation.
+now if it is a screw simulation then is it a "singlescrew", "twinscrew" case.
+synonym for "singlescrew" is SSE and for "twinscrew" TSE
+the screws might be addressed by a few geometrical parameters like ScrewDiameter [mm], ScrewLength [mm], ScrewScrewGap [mm], ScrewBarrelGap [mm].
+
+if it is a "twinscrew", it is a "parallel axis" case or a "conical screw" with tapering axis. if not explicitly mentioned then it is a parallel axis case.
+if it is a "screw" simulation then it might be necessary to know if the "barrel" is standard or do we need an additional "fluid domain" in which the screws are operating.again, default is that the barrel is standard
+in addition there might be some "obstacles" also present, such as "pins" in case of the screw sim-setups. if not defined, lets just ignore them.
+next thing to know is if the simulation is "isothermal" or "non-isothermal" or has a "prescribed temperature distribution". if heat simulation is requested the case is "non-isothermal"
+other thing to clarify is that if the simulation needs a "mixing analysis" then particle tracing has to be performed.
+in case that a TSE is requested make sure that the 2 screw pairs are geometrically identical or geometrically different. if different we need the geometrical representation of these screws and the relative angular shift (in german "versatzwinkel") is to be defined. if not mentioned explicitly then the screws are identical. 
+
+
+for TSE we need all the following basic geometrical information to define the default barrel: BarrelDiameter [mm], CenterlineDistance [mm] and BarrelLenght [mm]. If the ScrewLength is provided then the barreldiamter is computable by BarrelDiameter = ScrewLength + BarrelDiameter which guarantees a relaxation section at the inflow and outflow region. 
+
+in case of the TSE sim by default we use the standard barrel which is in addition characterized with a so called V-cut. the VCut is to make the sharp edge between the barrels blunt. there 2 type of V-cuts, either a straight or a round one. if straight V-cut is used then we need the StraightVCut parameter vaule which is the depth of the removal and in case of the round VCut we need the diameter of the Cut to remove the sharp edge betweeen the barrels.  if no info for the vcut is defined use the 2.5% value of the BarrelDiameter
+
+in case of SSEs we use by default the "hollow cylinder" or hollow barrel, but in case that we simulate the end part of the screw then the barrel has to be a "fullcylinder"
+
+
+if heat simulation or particle simulation is indicated in context of a TSE simulation all angles covering the 360 space has to be computed, otherwise some angle positions will also suffice. if particle simulation is invoked in context with TSE then no mesh deformation is allowed to be used. if the complete periodic state has to be simulated it is helpful to know the "geometrical periodicity" 
+
+for all these cases we need material data. this is "density" (can be referenced as "rho") and "rheological parameters".
+"density"  is given in [g/cm3]
+
+for "rheological parameters" we need either Carreau parameters (A in [Pa.s],B in [1/s], C [is unitless because it is the exponent],  parameter values) or Powerlaw parameters (K [Pa.s] and n [unitless, because it is the exponent]) and in case that the viscosity is known to be temperature dependent we need either the "TbTs" temperature parameters as (Tb [K] and Ts [K]) or the "Arrhenius" temperature parameters (E [J/mol] and Tr [K]) parameters. 
+if heat simulation is requested the "thermal properties" are to be provided as Lambda [W/m/K] and Cp [kJ/kg/K]
+
+in case that we do screw simulations we need one "mass throughput parameter" [kg/h] and a "material temperature". "material temperature" is identical to the inflow temperature of the material. 
+In case of "die" simulations it might happen that we do have either more materials ("multimaterial case") present and then we need for all these materials the respective maeterial parametrs and/or we do have multiple inflows. "screw" simulations are always "singlematerial case" and the "die" sims might also be single material cases. in case nothing mentioned about multimaterial do not request the material properties of the respective materials. 
+
+in case of "screw" simulations we need to know the "rotation speed" of the screws.
+in case of "non-isothermal" we also need to know if the barrel or the screws are "isothermal" (if yes what is their respective temperature) but if these infos are not known treat them implicitly as adiabatic. if they are explicitly given not be adiabatic (isothermal) then the temperature definition for the individual pieces is necessary. 
+
+
+in case that a "wall-slip" model is mentioned, the respective properties must be requested otherwise skip this item. the parameters of the "wall-slip" model  are are : "Tau_Crit" [Pa], "Tau_span" [Pa], "d" [mm] and "mu_wall" [Pa.s]
+
+in case that forces on some "obstacles" or "components" need to be measured request the geometry representation of these components
+
+
+
