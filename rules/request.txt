@@ -29,4 +29,6 @@ barrel diameter 5.7cm
 centerline distance 3cm
 
 
-summary should be created, a validation of the available parametrs should be checked and the quantities for which a descriptive computation is addressed in the rules, should be computed. in case that some parameters are provided in other units then indicated in the rules please convert them into the defined units
+summary should be created, a validation of the available parametrs should be checked and the 
+quantities for which a descriptive computation is addressed in the rules, should be computed. in case that some 
+parameters are provided in other units then indicated in the rules please convert them into the defined units

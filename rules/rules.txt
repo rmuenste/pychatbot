@@ -13,29 +13,49 @@ in case that a TSE is requested make sure that the 2 screw pairs are geometrical
 
 for TSE we need all the following basic geometrical information to define the default barrel: BarrelDiameter [mm], CenterlineDistance [mm] and BarrelLenght [mm]. If the ScrewLength is provided then the barreldiamter is computable by BarrelDiameter = ScrewLength + BarrelDiameter which guarantees a relaxation section at the inflow and outflow region. 
 
-in case of the TSE sim by default we use the standard barrel which is in addition characterized with a so called V-cut. the VCut is to make the sharp edge between the barrels blunt. there 2 type of V-cuts, either a straight or a round one. if straight V-cut is used then we need the StraightVCut parameter vaule which is the depth of the removal and in case of the round VCut we need the diameter of the Cut to remove the sharp edge betweeen the barrels.  if no info for the vcut is defined use the 2.5% value of the BarrelDiameter
+in case of the TSE sim by default we use the standard barrel which is in addition characterized with a so called V-cut. 
+the VCut is to make the sharp edge between the barrels blunt. there 2 type of V-cuts, either a straight or a round one. 
+if straight V-cut is used then we need the StraightVCut parameter vaule which is the depth of the removal and in case of 
+the round VCut we need the diameter of the Cut to remove the sharp edge betweeen the barrels.  
+if no info for the vcut is defined use the 2.5% value of the BarrelDiameter
 
-in case of SSEs we use by default the "hollow cylinder" or hollow barrel, but in case that we simulate the end part of the screw then the barrel has to be a "fullcylinder"
+in case of SSEs we use by default the "hollow cylinder" or hollow barrel, but in case that we simulate the end part of the 
+screw then the barrel has to be a "fullcylinder"
 
 
-if heat simulation or particle simulation is indicated in context of a TSE simulation all angles covering the 360 space has to be computed, otherwise some angle positions will also suffice. if particle simulation is invoked in context with TSE then no mesh deformation is allowed to be used. if the complete periodic state has to be simulated it is helpful to know the "geometrical periodicity" 
+if heat simulation or particle simulation is indicated in context of a TSE simulation all angles covering the 360 space has 
+to be computed, otherwise some angle positions will also suffice. if particle simulation is invoked in context with TSE then 
+no mesh deformation is allowed to be used. if the complete periodic state has to be simulated it is helpful to know the 
+"geometrical periodicity" 
 
 for all these cases we need material data. this is "density" (can be referenced as "rho") and "rheological parameters".
 "density"  is given in [g/cm3]
 
-for "rheological parameters" we need either Carreau parameters (A in [Pa.s],B in [1/s], C [is unitless because it is the exponent],  parameter values) or Powerlaw parameters (K [Pa.s] and n [unitless, because it is the exponent]) and in case that the viscosity is known to be temperature dependent we need either the "TbTs" temperature parameters as (Tb [K] and Ts [K]) or the "Arrhenius" temperature parameters (E [J/mol] and Tr [K]) parameters. 
+for "rheological parameters" we need either Carreau parameters (A in [Pa.s],B in [1/s], C [is unitless because it is the 
+exponent],  parameter values) or Powerlaw parameters (K [Pa.s] and n [unitless, because it is the exponent]) and in case that 
+the viscosity is known to be temperature dependent we need either the "TbTs" temperature parameters as (Tb [K] and Ts [K]) or 
+the "Arrhenius" temperature parameters (E [J/mol] and Tr [K]) parameters. 
+
 if heat simulation is requested the "thermal properties" are to be provided as Lambda [W/m/K] and Cp [kJ/kg/K]
 
-in case that we do screw simulations we need one "mass throughput parameter" [kg/h] and a "material temperature". "material temperature" is identical to the inflow temperature of the material. 
-In case of "die" simulations it might happen that we do have either more materials ("multimaterial case") present and then we need for all these materials the respective maeterial parametrs and/or we do have multiple inflows. "screw" simulations are always "singlematerial case" and the "die" sims might also be single material cases. in case nothing mentioned about multimaterial do not request the material properties of the respective materials. 
+in case that we do screw simulations we need one "mass throughput parameter" [kg/h] and a "material temperature". 
+"material temperature" is identical to the inflow temperature of the material. 
+
+In case of "die" simulations it might happen that we do have either more materials ("multimaterial case") present and then 
+we need for all these materials the respective maeterial parametrs and/or we do have multiple inflows. 
+"screw" simulations are always "singlematerial case" and the "die" sims might also be single material cases. 
+in case nothing mentioned about multimaterial do not request the material properties of the respective materials. 
 
 in case of "screw" simulations we need to know the "rotation speed" of the screws.
-in case of "non-isothermal" we also need to know if the barrel or the screws are "isothermal" (if yes what is their respective temperature) but if these infos are not known treat them implicitly as adiabatic. if they are explicitly given not be adiabatic (isothermal) then the temperature definition for the individual pieces is necessary. 
+
+in case of "non-isothermal" we also need to know if the barrel or the screws are "isothermal" (if yes what is their respective 
+temperature) but if these infos are not known treat them implicitly as adiabatic. if they are explicitly given not be 
+adiabatic (isothermal) then the temperature definition for the individual pieces is necessary. 
 
 
-in case that a "wall-slip" model is mentioned, the respective properties must be requested otherwise skip this item. the parameters of the "wall-slip" model  are are : "Tau_Crit" [Pa], "Tau_span" [Pa], "d" [mm] and "mu_wall" [Pa.s]
+in case that a "wall-slip" model is mentioned, the respective properties must be requested otherwise skip this item. 
+the parameters of the "wall-slip" model  are are : "Tau_Crit" [Pa], "Tau_span" [Pa], "d" [mm] and "mu_wall" [Pa.s]
 
-in case that forces on some "obstacles" or "components" need to be measured request the geometry representation of these components
-
-
+in case that forces on some "obstacles" or "components" need to be measured request the geometry representation of these 
+components
 
