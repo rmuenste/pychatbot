@@ -110,7 +110,7 @@ async def websocketChat(websocket: WebSocket):
     while True:
         # Get data from client
         userInput = await websocket.receive_text()
-        chatLog.append({"role": "user", "content": userInput})
+        chatLog.append({"role": "user", "content": userInput})        
         chatResponses.append(userInput)
 
         try:
@@ -121,22 +121,26 @@ async def websocketChat(websocket: WebSocket):
                 stream=True
             )
 
-            aiResponse = ""
+            chunkCounter = 0
+
+            # We will sit in this loop and await the stream of responses
+            # See here for more info:
+            # https://cookbook.openai.com/examples/how_to_stream_completions
             for chunk in response:
                 if chunk.choices[0].delta.content is not None:
                     aiResponse += chunk.choices[0].delta.content
-                    await websocket.send_text(chunk.choices[0].delta.content)
-
-            chatResponses.append(aiResponse)
+                    await websocket.send_text(chunk.choices[0].delta.content) 
+                    # Increment the chunk counter
+                    chunkCounter += 1
 
         except Exception as e:
             # Send data back to client
             await websocket.send_text(f'Error: {str(e)}')    
             logger.error(e)
 
-
-            #botResponse = response.choices[0].message.content
-            #chatLog.append({"role": "assistant", "content": aiResponse})
+        # Append the assistant's response to the chat log
+        chatLog.append({"role": "assistant", "content": aiResponse})
+        chatResponses.append(aiResponse)
 
 #==============================================================================
 # @app.post("/chat")
