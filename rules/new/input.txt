@@ -1,0 +1,72 @@
+User
+here i have a new case to be converted to ini file:
+
+MATERIAL 1901
+HDPE Lupolen 5021DX
+Allgemeine Informationen
+Typ
+PE-HD
+Mechanische Informationen
+Materialdichte [kg/m³]
+810
+Thermische Informationen
+Wärmeleitfähigkeit [W/mK]
+0.28865605
+Wärmekapazität [kJ/kgK]
+3.04
+T_B [°C]
+220
+T_st [°C]
+-158.58676
+Nullviskosität (A) [Pa * s]
+10523.29184
+Rezip. Übergangsgeschwindigkeit (B) [s]
+0.20233
+Exponent [-]
+0.65625
+
+SRID :: 13285
+
+
+
+
+
+	
+Drehzahl (1/min):
+300
+Durchsatz (kg/h):
+30
+Gehäusetemperatur (°C):
+Optional
+Materialtemperatur (°C):
+230
+Zylinderdurchmesser:
+Optional
+28.5
+Achsabstand:
+Optional
+23
+Material:
+1901
+	
+Output Parameter 	
+Simulationsergebnisse:
+1
+Mischanalyse/ Particle-Tracing:
+1
+Kommentar:
+Verdrehung des einen Elements relativ zum anderen um 30°. 
+
+screw_-Y_extended_by_10.off
+screw_+Y_extended_by_10.off
+
+Zylinderdurchmesser: 28,5 mm
+Laenge: 45 mm
+Schneckendurchmesser: 28,1 mm
+Schneckenschlupf: 0,2 mm
+Achsabstand: 23 mm
+Kerndurchmesser: 17,1
+Typ: Scheiben
+VCut: 0,5 mm
+Anmerkung: Eine der beiden Schnecken muss um 30° verdreht werden.
+

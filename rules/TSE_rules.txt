@@ -1,0 +1,187 @@
+here i am providing you with 2 sample configurations which should be generated for the underlying TSE simulation
+there are certain sections with values which need to be set up based on the provided user inputs
+
+
+[E3DGeometryData]
+[E3DGeometryData/Machine]
+Type=TSE
+Unit=mm
+Zwickel=straight
+MachineName=XY 60
+RotationDirection=LEFT
+BarrelDiameter=28.5
+CenterlineDistance=23
+BarrelStraightCut=0.5
+NoOfElements=1
+NoOfFlights=1
+BarrelLength=45.0
+
+[E3DGeometryData/Machine/Element_1]
+GapScrewScrew=0.2
+ObjectType=screw
+Unit=mm
+startposition=0.0
+off_filelistL=s-.off
+off_filelistR=s+.off
+off_filelist=s.off
+innerdiameter=17.1
+type=OFF_LR
+
+[E3DProcessParameters]
+ScrewSpeed=600.0
+ProcessType=THROUGHPUT
+MassThroughput=10.0
+MaterialTemperature=230.0
+BarrelTemperature=_INVALID_
+ScrewTemperature=_INVALID_
+BarrelTemperatureAdiabatic=NO
+ScrewTemperatureAdiabatic=YES
+
+[E3DProcessParameters/Material]
+Name=1901
+Type=PE-HD
+
+[E3DProcessParameters/Material/RheologicalData]
+CalcVisco=Carreau
+CalcTemp=TbTs
+
+[E3DProcessParameters/Material/RheologicalData/Carreau]
+ZeroViscosity=10523.29184
+RecipVelocity=0.20233
+Exponent=0.65625
+
+[E3DProcessParameters/Material/RheologicalData/TBTS]
+standardtemperature=-158.58676
+referencetemperature=220.0
+
+[E3DProcessParameters/Material/ThermoData]
+heatconductivity=0.28865605
+heatconductivityslope=0.0
+heatcapacity=3.04
+heatcapacityslope=0.0
+densitymodel=DENSITY
+
+[E3DProcessParameters/Material/ThermoData/Density]
+Density=0.81
+DensitySlope=0.0
+
+[E3DSimulationsettings]
+MeshQuality=medium
+HexMesher=TwinScrew
+KTPRelease=NO
+
+========================
+
+
+[SigmaFileInfo]
+FileType=ToExtrud3D
+FileVersion=SIGMA 10.0
+Date=07/02/19
+SigmaVersion=SIGMA 12.0.1(4492)
+ConfigId=XY60_PE_400.xpro-201907020948
+
+[E3DGeometryData]
+[E3DGeometryData/Machine]
+Type=TSE
+Unit=mm
+Zwickel=straight
+MachineName=XY 60
+RotationDirection=LEFT
+BarrelDiameter=28.5
+CenterlineDistance=23
+BarrelStraightCut=0.5
+NoOfElements=1
+NoOfFlights=1
+BarrelLength=45.0
+
+[E3DGeometryData/Machine/Element_1]
+GapScrewScrew=0.5
+ObjectType=screw
+Unit=mm
+startposition=0.0
+off_filelist=screw_Scheiben_extended_by_10.off
+innerdiameter=17.1
+type=OFF
+
+[E3DProcessParameters]
+ScrewSpeed=50.0
+ProcessType=THROUGHPUT
+MassThroughput=10.0
+MaterialTemperature=230.0
+BarrelTemperature=_INVALID_
+ScrewTemperature=_INVALID_
+BarrelTemperatureAdiabatic=NO
+ScrewTemperatureAdiabatic=YES
+
+[E3DProcessParameters/Material]
+Name=1901
+Type=PE-HD
+
+[E3DProcessParameters/Material/RheologicalData]
+CalcVisco=Carreau
+CalcTemp=TbTs
+
+[E3DProcessParameters/Material/RheologicalData/Carreau]
+ZeroViscosity=10523.29184
+RecipVelocity=0.20233
+Exponent=0.65625
+
+[E3DProcessParameters/Material/RheologicalData/TBTS]
+standardtemperature=-158.58676
+referencetemperature=220.0
+
+[E3DProcessParameters/Material/ThermoData]
+heatconductivity=0.28865605
+heatconductivityslope=0.0
+heatcapacity=3.04
+heatcapacityslope=0.0
+densitymodel=DENSITY
+
+[E3DProcessParameters/Material/ThermoData/Density]
+Density=0.81
+DensitySlope=0.0
+
+[E3DSimulationsettings]
+MeshQuality=medium
+HexMesher=TwinScrew
+KTPRelease=NO
+
+
+==================================================
+let me to explain the meaning of all parameters 
+
+the first section is E3DGeometryData/Machine
+since this is a twinscrew config file generator 
+type = TSE
+lest use by default 
+Unit = mm
+this means that all geometrical units in this generated section has to have the value in mm 
+ScrewCylinderRendering = OFF
+barreldiameter [mm] is the diameter of the barrel // if this is not defined but screwdiameter and GapScrewScrew is defined then barreldiameter = screwdiameter + 2*GapScrewScrew. can be defined in german as Zylinderdurchmesser
+barrellength [mm] is the lenght of the barrel  // if this is not defined but screwlength and (screwdiameter OR barreldiameter ) is known then barrellength = screwlength + barreldiameter, can be defined in german as Laenge
+noofelements  is the number of screw elements. unless no other input is defined keep this at the default 1. if the barrel geometry is also available (a file name with ".off" ending and with "FD" in the name ) then that represents an additional element . 
+CenterlineDistance [mm] is the centerline distance between the axis, can be defined in german as Achsabstand
+NoOfFlights is the number of flights of the screws if defined. a twoflighted element has 2 flights. by default use 1 flight. can be defined by german keywords like Eingaengig is singleflighted or Zweigaengig is twoflighted
+Zwickel lets use for the time being only "straight". the related value to this parameter is actually BarrelStraightCut which is the so called VCut, a dept of a cut which removes the sharp edge between the two cylindrical barrels by the depth of this parameter.
+BarrelStraightCut is the depth of the VCut in [mm]
+RotationDirection can e LEFT or RIGHT, but use LEFT by default
+MachineName use TSEMachine by default, unless no other input is indicated
+
+the other section is [E3DGeometryData/Machine/Element_X]
+
+where then as many sections are created as many noofelements have been defined before. 
+the first sections is/are for the screw(s) 
+
+GapScrewScrew= is the clearance between the barrel and the screw. can be defined in german as Schneckenspiel
+ObjectType is "screw" or 'die'. in case of a 'screw' section it is 'screw' and in case of the FD it is 'die' 
+ScrewDiameter is the diamter of the screw. if barreldiamter and GapScrewScrew is defined then ScrewDiameter = barreldiamter - 2*GapScrewScrew , can be defined in german as Schneckendurchmesser
+Unit lets use mm by default 
+startposition is 0.0 unless there is no axial shift defined for this screw section 
+type is either "OFF" or "OFF_LR", depending on if one screw file (OFF) is defined or 2 (OFF_LR) because if only one then the 2 screws are identical and describable with the same off file. the screw files are to be founnd by  looking for an ".off" ending and "screw" in the file name)  
+now, if OFF is the type of this element section then off_filelist is used and is assigned to the single screw file found in the case
+if OFF_LR is the type then 
+off_filelistL is assigned to the screw file with "L" or "-" in the filename
+off_filelistR  is assigned to the screw file with "R" or "+" in the filename
+innerdiameter is set to the innerdiamter of the screw, can be defined in german as Kerndurchmesser
+
+

@@ -1,0 +1,72 @@
+here i am providing you with a sample configuration file written in INI file formt which should be generated for a simulation case as a configuration file
+
+
+[E3DGeometryData/Machine]
+Type=[TSE,SSE,DIE]
+Unit=mm
+Zwickel=[straight,curved]
+MachineName=Machine
+RotationDirection=[LEFT,RIGHT]
+BarrelDiameter={double value}
+CenterlineDistance={double value}
+BarrelStraightCut={double value}
+BarrelCurvedCut={double value}
+NoOfElements={integer value}
+NoOfFlights={integer value}
+BarrelLength={double value}
+ScrewCylinderRendering=[YES,NO]
+RotationType=[CO,COUNTER]
+RotationAxis=[PARALLEL,NONPARALLEL]
+RotAxisAngle = {double value}
+RotAxisCenter = {double value}
+
+==================================================
+let me to explain the meaning of all parameters 
+
+if there is an indication that it is a twinscrew extruder , TSE, doppelschnecken extruder or something similar then 
+type = TSE
+if einschnecke extruder, single screw extruder or SSE is indicated then 
+type = SSE
+if extrusion die, extrusions werkzeug or DIE is indicated then 
+type = DIE
+
+
+by default lets always use
+Unit = mm
+what at the same time means that all exported values must be converted into mm 
+
+lets use by default
+ScrewCylinderRendering = OFF
+
+"barreldiameter" is the diameter of the barrel or in german gehause durchmesser. in case that this parameter is not explicitly defined but the screw diameter OR Schneckendurchmesser AND screwclearance OR Schneckenspiel is given then compute the barreldiameter as
+barreldiameter = screw diameter + 2*screwclearance
+barreldiameter is to be exported in mm units
+
+"barrellength"  is the lenght of the barrel or in german laenge des gehauses . to be exported in mm units  
+
+"noofelements"  is the number of screw elements provided in the case. unless no other input is defined keep this at the default 1. 
+
+"CenterlineDistance" is the centerline distance between the axis, can be defined in german as Achsabstand. the value is needed in case of TSE sims
+
+"NoOfFlights" is the number of flights of the screws if defined, in german "gaenge". a twoflighted element has 2 flights. by default use 1 flight. can be defined by german keywords like Eingaengig is singleflighted or Zweigaengig is twoflighted
+
+"Zwickel" is related to the barrel V-Cut, by defult the "straight" should be used unless curved V-Cut is being stated. the related value to this parameter is actually BarrelStraightCut in case of straight and BarrelCurvedCut in case of round cut. 
+
+BarrelStraightCut is the depth of the VCut in [mm], if the "straight" V-Cut is used and this cut depth is not explicitly defined then its value is to be computed as the 2.5% of the BarrelDiameter
+
+"RotationDirection" can e LEFT or RIGHT, but use LEFT by default
+
+MachineName use TSEMachine by default, unless no other input is indicated
+
+"RotationType" by default use "CO", unless counter-rotating extruders or gegenlaufig extruder is not mentioned
+
+"RotationAxis" is by default "PARALLEL" unless there is something mentioned about non-parallel or conical axis :then use "NONPARALLEL"
+
+IF NONPARALLEL axis are used then RotAxisAngle and RotAxisCenter has to be both defined
+
+"RotAxisAngle" is the angle between the tapering or conical axis
+
+"RotAxisCenter" is the value at the z axis where the 2 rotation axis intersect each other
+
+please export the respective INI section for the respective keys with the obtained values. in case no value could be found, set the value to "_INVALID_". 
+
